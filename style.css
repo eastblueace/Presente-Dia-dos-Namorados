@@ -1,0 +1,667 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Reset Global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body */
+body {
+    background: #fff5fa;
+    /* rosinha claro */
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Título Principal */
+h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    /* 2.5 vezes o tamanho padrão da fonte */
+    margin-bottom: 20px;
+    color: #d6336c;
+    /* tom de rosa mais forte */
+}
+
+h1::before {
+    content: "❤️ ";
+    font-size: 3rem;
+    vertical-align: center;
+}
+
+/* Contador */
+#contador {
+    background-color: #ffe6f0;
+    /* Fundo rosa claro, suave */
+    border-radius: 12px;
+    /* Cantos arredondados */
+    padding: 20px 30px;
+    /* Espaço interno pra ficar "fofinho" */
+    margin: 20px auto;
+    /* Espaço em cima e embaixo, e centralizado */
+    width: fit-content;
+    /* Ajusta a largura ao conteúdo */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* Fonte limpa */
+    font-size: 1.4rem;
+    /* Texto um pouco maior */
+    color: #cc3366;
+    /* Tom de rosa mais forte para o texto */
+    box-shadow: 0 4px 8px rgba(204, 51, 102, 0.3);
+    /* Sombra suave rosa */
+    text-align: center;
+    /* Centraliza o texto */
+    user-select: none;
+    /* Impede seleção do texto, só se quiser */
+}
+
+/* Botão */
+button#botaoFrase {
+    background-color: #d6336c;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 25px;
+    color: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto 30px auto;
+    /* centraliza e espaço embaixo */
+    box-shadow: 0 4px 8px rgba(214, 51, 108, 0.4);
+}
+
+button#botaoFrase:hover {
+    background-color: #a32651;
+}
+
+/* Frase Gerada */
+#fraseGerada {
+    max-width: 400px;
+    margin: 0 auto;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #d6336c;
+    text-align: center;
+    min-height: 60px;
+    /* altura mínima para não pular o layout */
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+}
+
+#fraseGerada.mostrar {
+    opacity: 1;
+}
+
+/* Container da Timeline - AMPLIADO */
+#timelineContainer {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 40px 30px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+    min-height: 600px;
+}
+
+/* Título da Timeline */
+#timelineContainer h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #d26a9c;
+}
+
+/* Formulário de Adicionar Evento - Seletores múltiplos para garantir centralização - COMPACTO */
+#formAdicionarEvento,
+.form-adicionar-evento,
+.adicionar-evento,
+form[id*="adicionar"],
+form[class*="adicionar"],
+.evento-form {
+    background-color: #fff5fa;
+    border: 2px solid #fbb1c8;
+    border-radius: 15px;
+    padding: 15px;
+    margin: 15px auto !important;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(214, 51, 108, 0.2);
+    text-align: center;
+    display: block;
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+}
+
+#formAdicionarEvento h3,
+.form-adicionar-evento h3,
+.adicionar-evento h3,
+form[id*="adicionar"] h3,
+form[class*="adicionar"] h3,
+.evento-form h3 {
+    color: #d6336c;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+#formAdicionarEvento input,
+#formAdicionarEvento textarea,
+#formAdicionarEvento select,
+.form-adicionar-evento input,
+.form-adicionar-evento textarea,
+.form-adicionar-evento select,
+.adicionar-evento input,
+.adicionar-evento textarea,
+.adicionar-evento select,
+form[id*="adicionar"] input,
+form[id*="adicionar"] textarea,
+form[id*="adicionar"] select,
+form[class*="adicionar"] input,
+form[class*="adicionar"] textarea,
+form[class*="adicionar"] select,
+.evento-form input,
+.evento-form textarea,
+.evento-form select {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    margin: 2px auto 6px auto !important;
+    border: 2px solid #fbb1c8;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: white;
+    display: block !important;
+    box-sizing: border-box;
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+}
+
+#formAdicionarEvento input:focus,
+#formAdicionarEvento textarea:focus,
+#formAdicionarEvento select:focus,
+.form-adicionar-evento input:focus,
+.form-adicionar-evento textarea:focus,
+.form-adicionar-evento select:focus,
+.adicionar-evento input:focus,
+.adicionar-evento textarea:focus,
+.adicionar-evento select:focus,
+form[id*="adicionar"] input:focus,
+form[id*="adicionar"] textarea:focus,
+form[id*="adicionar"] select:focus,
+form[class*="adicionar"] input:focus,
+form[class*="adicionar"] textarea:focus,
+form[class*="adicionar"] select:focus,
+.evento-form input:focus,
+.evento-form textarea:focus,
+.evento-form select:focus {
+    outline: none;
+    border-color: #d6336c;
+    box-shadow: 0 0 5px rgba(214, 51, 108, 0.3);
+}
+
+#formAdicionarEvento button,
+.form-adicionar-evento button,
+.adicionar-evento button,
+form[id*="adicionar"] button,
+form[class*="adicionar"] button,
+.evento-form button {
+    background-color: #d6336c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 25px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin: 8px auto !important;
+    display: block !important;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 8px rgba(214, 51, 108, 0.4);
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+}
+
+#formAdicionarEvento button:hover,
+.form-adicionar-evento button:hover,
+.adicionar-evento button:hover,
+form[id*="adicionar"] button:hover,
+form[class*="adicionar"] button:hover,
+.evento-form button:hover {
+    background-color: #a32651;
+}
+
+#formAdicionarEvento label,
+.form-adicionar-evento label,
+.adicionar-evento label,
+form[id*="adicionar"] label,
+form[class*="adicionar"] label,
+.evento-form label {
+    display: block;
+    color: #d6336c;
+    font-weight: 600;
+    margin: 6px auto 2px auto !important;
+    text-align: left;
+    max-width: 400px;
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+}
+
+/* Seção completa da Linha do Tempo com formulário */
+.timeline-section,
+#timelineSection,
+.nossa-linha-tempo,
+section[id*="timeline"],
+section[class*="timeline"] {
+    text-align: center !important;
+    margin: 20px auto !important;
+    max-width: 1400px;
+    width: 95%;
+    padding: 15px;
+}
+
+/* Título "🕰️ Nossa Linha do Tempo" */
+.timeline-title,
+h2[id*="timeline"],
+h2[class*="timeline"],
+.nossa-linha-tempo h2,
+#timelineSection h2,
+h2,
+h3 {
+    text-align: center !important;
+    font-size: 2rem;
+    margin: 20px auto !important;
+    color: #d6336c;
+    display: block !important;
+    width: 100% !important;
+}
+
+/* Formulário inline da linha do tempo (Data, Descrição, etc.) - SUPER COMPACTO */
+.timeline-form,
+.inline-form,
+.add-event-form,
+form[class*="timeline"],
+.nossa-linha-tempo form {
+    background-color: #fff5fa;
+    border: 2px solid #fbb1c8;
+    border-radius: 15px;
+    padding: 12px;
+    margin: 15px auto !important;
+    max-width: 600px;
+    box-shadow: 0 4px 12px rgba(214, 51, 108, 0.2);
+    text-align: center !important;
+    display: block !important;
+}
+
+/* Labels do formulário (Data:, Descrição:, etc.) - COMPACTO */
+.timeline-form label,
+.inline-form label,
+.add-event-form label,
+form[class*="timeline"] label,
+.nossa-linha-tempo form label,
+label[for*="data"],
+label[for*="descricao"],
+label[for*="imagem"],
+label {
+    display: block !important;
+    color: #d6336c;
+    font-weight: 600;
+    margin: 4px auto 1px auto !important;
+    text-align: center !important;
+    max-width: 400px;
+    font-size: 1.1rem;
+}
+
+/* Inputs do formulário - SUPER COMPACTO */
+.timeline-form input,
+.timeline-form textarea,
+.timeline-form select,
+.inline-form input,
+.inline-form textarea,
+.inline-form select,
+.add-event-form input,
+.add-event-form textarea,
+.add-event-form select,
+form[class*="timeline"] input,
+form[class*="timeline"] textarea,
+form[class*="timeline"] select,
+.nossa-linha-tempo form input,
+.nossa-linha-tempo form textarea,
+.nossa-linha-tempo form select,
+input[id*="data"],
+input[id*="descricao"],
+textarea[id*="descricao"],
+input[id*="imagem"],
+input[type="file"],
+input,
+textarea,
+select {
+    width: 100%;
+    max-width: 400px;
+    padding: 8px 12px;
+    margin: 1px auto 4px auto !important;
+    border: 2px solid #fbb1c8;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    background-color: white;
+    display: block !important;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Botão "Adicionar à Linha do Tempo" - TAMANHO ORIGINAL */
+.timeline-form button,
+.inline-form button,
+.add-event-form button,
+form[class*="timeline"] button,
+.nossa-linha-tempo form button,
+button[id*="adicionar-timeline"],
+button[class*="adicionar-timeline"],
+input[type="submit"][value*="Adicionar"],
+button {
+    background-color: #d6336c;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 6px auto !important;
+    display: block !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(214, 51, 108, 0.4);
+    font-family: 'Poppins', sans-serif;
+    max-width: 300px;
+    text-align: center !important;
+    position: relative;
+    left: auto !important;
+    right: auto !important;
+}
+
+.timeline-form button:hover,
+.inline-form button:hover,
+.add-event-form button:hover,
+form[class*="timeline"] button:hover,
+.nossa-linha-tempo form button:hover,
+button[id*="adicionar-timeline"]:hover,
+button[class*="adicionar-timeline"]:hover,
+input[type="submit"][value*="Adicionar"]:hover,
+button:hover {
+    background-color: #a32651;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(214, 51, 108, 0.5);
+}
+
+/* Linha do Tempo - Horizontal AMPLIADA */
+#linhaDoTempo {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin: 40px auto;
+    padding: 60px 40px;
+    list-style: none;
+    width: 100%;
+    max-width: none;
+    overflow-x: auto;
+    overflow-y: hidden;
+    position: relative;
+    scroll-behavior: smooth;
+    min-height: 400px;
+    background: linear-gradient(135deg, #fff5fa 0%, #ffeef2 100%);
+    border-radius: 20px;
+    box-shadow: inset 0 0 20px rgba(214, 51, 108, 0.1);
+    /* Scrollbar personalizada */
+    scrollbar-width: thin;
+    scrollbar-color: #ff6b81 #ffe6f0;
+}
+
+/* Scrollbar para Webkit browsers */
+#linhaDoTempo::-webkit-scrollbar {
+    height: 12px;
+}
+
+#linhaDoTempo::-webkit-scrollbar-track {
+    background: #ffe6f0;
+    border-radius: 10px;
+}
+
+#linhaDoTempo::-webkit-scrollbar-thumb {
+    background: #ff6b81;
+    border-radius: 10px;
+}
+
+#linhaDoTempo::-webkit-scrollbar-thumb:hover {
+    background: #d6336c;
+}
+
+/* Linha horizontal central - Z-INDEX FIXO E BAIXO */
+#linhaDoTempo::before {
+    content: "";
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 50%;
+    height: 4px;
+    background: linear-gradient(90deg, #ff6b81 0%, #d6336c 50%, #ff6b81 100%);
+    transform: translateY(-50%);
+    z-index: 1;
+    /* Z-index baixo e fixo */
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(214, 51, 108, 0.3);
+    pointer-events: none;
+    /* Impede interferência com o hover */
+}
+
+/* Cada evento da timeline - Z-INDEX ALTO E FIXO */
+.timeline-item,
+.eventoLinhaDoTempo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    background-color: white;
+    border: 2px solid #fbb1c8;
+    padding: 30px 20px;
+    border-radius: 20px;
+    position: relative;
+    min-width: 350px;
+    max-width: 400px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background: linear-gradient(135deg, #ffffff 0%, #ffeef2 100%);
+    z-index: 10;
+    /* Z-index alto e fixo */
+    isolation: isolate;
+    /* Cria novo contexto de empilhamento */
+}
+
+/* Hover effect nos eventos - SEM MUDANÇA DE Z-INDEX */
+.timeline-item:hover,
+.eventoLinhaDoTempo:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(214, 51, 108, 0.25);
+    border-color: #d6336c;
+    /* z-index removido - mantém o valor fixo */
+}
+
+/* "Ponto" central na linha horizontal - Z-INDEX MÉDIO E FIXO */
+.timeline-item::before,
+.eventoLinhaDoTempo::before {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, #ff6b81 0%, #d6336c 100%);
+    border: 4px solid white;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: -12px;
+    transform: translateX(-50%);
+    z-index: 15;
+    /* Z-index médio e fixo */
+    box-shadow: 0 0 0 3px #ff6b81, 0 4px 12px rgba(214, 51, 108, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    pointer-events: none;
+    /* Impede interferência com o hover */
+}
+
+.timeline-item:hover::before,
+.eventoLinhaDoTempo:hover::before {
+    transform: translateX(-50%) scale(1.2);
+    box-shadow: 0 0 0 4px #d6336c, 0 6px 20px rgba(214, 51, 108, 0.6);
+}
+
+/* Data */
+.timeline-item .data {
+    font-weight: 600;
+    color: #b85784;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    background: linear-gradient(135deg, #fff5fa 0%, #ffe6f0 100%);
+    padding: 8px 16px;
+    border-radius: 25px;
+    border: 2px solid #fbb1c8;
+    box-shadow: 0 2px 8px rgba(214, 51, 108, 0.15);
+}
+
+/* Descrição */
+.timeline-item .descricao {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 20px;
+    line-height: 1.5;
+    text-align: center;
+    font-weight: 400;
+}
+
+/* Imagem */
+.timeline-item img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.timeline-item img:hover {
+    transform: scale(1.05);
+}
+
+/* Animações */
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Media Queries - Responsivo para Timeline Horizontal AMPLIADA */
+@media (max-width: 1200px) {
+    #timelineContainer {
+        width: 98%;
+        padding: 30px 20px;
+    }
+
+    #linhaDoTempo {
+        padding: 50px 30px;
+        gap: 40px;
+    }
+
+    .timeline-item,
+    .eventoLinhaDoTempo {
+        min-width: 320px;
+        max-width: 360px;
+    }
+}
+
+@media (max-width: 768px) {
+    #timelineContainer {
+        margin: 20px auto;
+        padding: 25px 15px;
+    }
+
+    #linhaDoTempo {
+        padding: 40px 20px;
+        gap: 30px;
+        min-height: 350px;
+    }
+
+    .timeline-item,
+    .eventoLinhaDoTempo {
+        min-width: 280px;
+        max-width: 320px;
+        padding: 25px 15px;
+    }
+}
+
+@media (max-width: 600px) {
+    #linhaDoTempo {
+        padding: 30px 10px;
+        gap: 20px;
+    }
+
+    .timeline-item,
+    .eventoLinhaDoTempo {
+        min-width: 250px;
+        max-width: 280px;
+        padding: 20px 12px;
+    }
+
+    .timeline-item .data {
+        font-size: 1rem;
+    }
+
+    .timeline-item .descricao {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #contador {
+        max-width: 90%;
+        font-size: 1rem;
+    }
+
+    button#botaoFrase {
+        width: 100%;
+        font-size: 1rem;
+        padding: 12px 0;
+    }
+
+    #fraseGerada {
+        max-width: 90%;
+        font-size: 1.1rem;
+    }
+
+    #timelineContainer {
+        width: 100%;
+        margin: 15px auto;
+        padding: 20px 10px;
+    }
+}

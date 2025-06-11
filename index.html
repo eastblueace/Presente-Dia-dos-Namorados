@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz dia Dos Namorados S2</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <h1>Estamos juntos há:</h1>
+    <div id="contador">
+        <p>Carregando...</p>
+    </div>
+
+    <button id="botaoFrase">Frase Fofa de Amor</button>
+    <div id="fraseGerada"></div>
+
+    <h2>🕰️ Nossa Linha do Tempo 🕰️</h2>
+
+    <form id="formEvento">
+        <label>Data:</label><br>
+        <input type="date" id="dataEvento" required><br><br>
+
+        <label>Descrição:</label><br>
+        <textarea id="descricaoEvento" rows="3" required></textarea><br><br>
+
+        <label>Imagem (opcional):</label><br>
+        <input type="file" id="imagemEvento" accept="image/*"><br><br>
+
+        <button type="submit">Adicionar à Linha do Tempo</button>
+    </form>
+
+    <section id="timelineContainer">
+        <h2>Linha do Tempo</h2>
+        <ul id="linhaDoTempo"></ul>
+    </section>
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
