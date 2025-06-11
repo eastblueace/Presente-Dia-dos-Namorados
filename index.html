@@ -38,25 +38,26 @@
         <ul id="linhaDoTempo"></ul>
     </section>
 
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.1/firebase-app.js";
-        // TODO: Add SDKs for Firebase products that you want to use
-        // https://firebase.google.com/docs/web/setup#available-libraries
+    <!-- Firebase App (compat SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
 
-        // Your web app's Firebase configuration
+    <script>
         const firebaseConfig = {
             apiKey: "AIzaSyBhNjYsqBdVXGAhalgudDcjRlTqRr8SPXs",
             authDomain: "presente-dia-dos-namorad-fa850.firebaseapp.com",
             databaseURL: "https://presente-dia-dos-namorad-fa850-default-rtdb.firebaseio.com",
             projectId: "presente-dia-dos-namorad-fa850",
-            storageBucket: "presente-dia-dos-namorad-fa850.firebasestorage.app",
+            storageBucket: "presente-dia-dos-namorad-fa850.appspot.com",
             messagingSenderId: "825828222327",
             appId: "1:825828222327:web:aac3a54cbb965db7af6d72"
         };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
+        // Inicializa Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        // Cria uma referência global para o banco (para uso no script.js)
+        const database = firebase.database();
     </script>
 
     <script src="script.js"></script>
