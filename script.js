@@ -128,6 +128,7 @@ const frasesFofas = [
     "With you, I could keep a secret",
     "And it's a new day, but it's not a new love"
 ];
+
 // Função para gerar uma frase aleatória
 function mostrarFraseFofa() {
     const indice = Math.floor(Math.random() * frasesFofas.length); // sorteia uma posição
@@ -149,10 +150,107 @@ function mostrarFraseFofa() {
 // Ativa a função quando o botão for clicado
 document.getElementById("botaoFrase").addEventListener("click", mostrarFraseFofa);
 
+// =================== FIREBASE DATABASE INTEGRATION ===================
+
+// Função para salvar evento no Firebase
+async function salvarEventoFirebase(evento) {
+    try {
+        const response = await fetch(`${firebaseConfig.databaseURL}/eventos.json`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                data: evento.data,
+                descricao: evento.descricao,
+                imagem: evento.imagem, // Base64 ou null
+                timestamp: new Date().toISOString()
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao salvar no Firebase');
+        }
+
+        console.log('Evento salvo no Firebase com sucesso!');
+    } catch (error) {
+        console.error('Erro ao salvar evento:', error);
+        alert('Erro ao salvar evento no Firebase. Tente novamente.');
+    }
+}
+
+// Função para carregar eventos do Firebase
+async function carregarEventosFirebase() {
+    try {
+        const response = await fetch(`${firebaseConfig.databaseURL}/eventos.json`);
+
+        if (!response.ok) {
+            throw new Error('Erro ao carregar do Firebase');
+        }
+
+        const dados = await response.json();
+
+        if (dados) {
+            const linhaDoTempo = document.getElementById('linhaDoTempo');
+            // Limpa a linha do tempo antes de carregar
+            linhaDoTempo.innerHTML = '';
+
+            // Converte objeto em array e ordena por timestamp
+            const eventos = Object.values(dados).sort((a, b) =>
+                new Date(a.timestamp) - new Date(b.timestamp)
+            );
+
+            // Renderiza cada evento
+            eventos.forEach(evento => {
+                criarElementoEvento(evento.data, evento.descricao, evento.imagem);
+            });
+
+            console.log(`${eventos.length} eventos carregados do Firebase!`);
+        }
+    } catch (error) {
+        console.error('Erro ao carregar eventos:', error);
+    }
+}
+
+// Função para criar elemento de evento na timeline
+function criarElementoEvento(data, descricao, imagemBase64 = null) {
+    const eventoDiv = document.createElement('div');
+    eventoDiv.classList.add('eventoLinhaDoTempo');
+
+    let conteudoHTML = `<p><strong>${data}</strong></p><p>${descricao}</p>`;
+
+    if (imagemBase64) {
+        conteudoHTML += `<img src="${imagemBase64}" alt="Imagem do evento" style="max-width: 200px; border-radius: 10px; margin-top: 10px;">`;
+    }
+
+    eventoDiv.innerHTML = conteudoHTML;
+    document.getElementById('linhaDoTempo').appendChild(eventoDiv);
+}
+
+// Função para converter imagem para Base64
+function converterImagemParaBase64(arquivo) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(arquivo);
+    });
+}
+
+// Carrega eventos quando a página carrega
+document.addEventListener('DOMContentLoaded', function () {
+    // Aguarda um pouco para garantir que o Firebase está configurado
+    setTimeout(() => {
+        carregarEventosFirebase();
+    }, 1000);
+});
+
+// =================== FORMULÁRIO DE EVENTOS ATUALIZADO ===================
+
 const form = document.getElementById('formEvento');
 
 // Captura o envio do formulário
-form.addEventListener('submit', function (event) {
+form.addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede que a página recarregue
 
     // Pega os dados do formulário
@@ -161,26 +259,31 @@ form.addEventListener('submit', function (event) {
     const imagemInput = document.getElementById('imagemEvento');
     const imagem = imagemInput.files[0]; // Pode ser undefined
 
-    // Cria o elemento do evento
-    const eventoDiv = document.createElement('div');
-    eventoDiv.classList.add('eventoLinhaDoTempo'); // Você pode estilizar essa classe com CSS
+    let imagemBase64 = null;
 
-    // Constrói o HTML do evento
-    let conteudoHTML = `<p><strong>${data}</strong></p><p>${descricao}</p>`;
-
-    // Se houver imagem, adiciona ao conteúdo
+    // Se houver imagem, converte para Base64
     if (imagem) {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            conteudoHTML += `<img src="${e.target.result}" alt="Imagem do evento" style="max-width: 200px; border-radius: 10px; margin-top: 10px;">`;
-            eventoDiv.innerHTML = conteudoHTML;
-            document.getElementById('linhaDoTempo').appendChild(eventoDiv);
-        };
-        reader.readAsDataURL(imagem); // Converte imagem em base64
-    } else {
-        eventoDiv.innerHTML = conteudoHTML;
-        document.getElementById('linhaDoTempo').appendChild(eventoDiv);
+        try {
+            imagemBase64 = await converterImagemParaBase64(imagem);
+        } catch (error) {
+            console.error('Erro ao converter imagem:', error);
+            alert('Erro ao processar imagem. Tente novamente.');
+            return;
+        }
     }
+
+    // Cria o objeto do evento
+    const eventoObj = {
+        data: data,
+        descricao: descricao,
+        imagem: imagemBase64
+    };
+
+    // Salva no Firebase
+    await salvarEventoFirebase(eventoObj);
+
+    // Cria o elemento do evento na interface
+    criarElementoEvento(data, descricao, imagemBase64);
 
     // Limpa os campos
     form.reset();
